@@ -28,33 +28,44 @@ function start() {
                 res[i].price
              );
         };
-        purchase();
     });
+    purchase();
 };
 
 function purchase() {
-    inquirer.prompt({
-        name: "item",
-        type: "input",
-        message: "What item would you like to purchase? (Choose ID)",
-        validate: function(value) {
-            if (isNaN(value) === false) {
-              return true;
+    connection.query("SELECT * FROM products", function(err, results){
+        if (err) throw err;
+        inquirer.prompt([
+        {
+            name: "item",
+            type: "input",
+            message: "What item would you like to purchase? (Choose ID)",
+            validate: function(value) {
+                if (isNaN(value) === false) {
+                  return true;
+                }
+                return false;
+              }
+        },
+        {
+            name: "quantity",
+            type: "input",
+            message: "How many of this would you like to buy?",
+            validate: function(value) {
+                if (isNaN(value) === false) {
+                  return true;
+                }
+                return false;
             }
-            return false;
-          }
-    },
-    {
-        name: "quantity",
-        type: "input",
-        message: "How many of this would you like to buy?",
-        validate: function(value) {
-            if (isNaN(value) === false) {
-              return true;
+        }
+        ]).then(function(answer){
+            var chosenItem;
+            for (var i = 0; i < results.length; i++) {
+              if (results[i].item_id === answer.item) {
+                chosenItem = results[i];
+              }
             }
-            return false;
-          }
-    }).then(function(answer){
-
+        })
     })
+    
 }
