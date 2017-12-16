@@ -4,7 +4,7 @@
 
 ![Bamazon Gif](/gif/bamazon.gif)
 
-#### This application allows you to purchase the listed products selecting the by their id.
+#### This application allows you to purchase the listed products selecting them by their id.
 
 * If you select a product that's not listed, the app will ask you to choose a valid one.
 
