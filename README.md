@@ -14,4 +14,4 @@
     * If the purchased amount equals the total in stock, the app will tell you that's all we have and give you the total due.
     * If the purchased amount exceeds the total in stock, the app will ask you to enter a valid amount.
 
-## Have Fun! :octocat:
+## Have Fun! :octocat: /play secret
