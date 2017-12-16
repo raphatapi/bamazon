@@ -46,7 +46,7 @@ function whatItem() {
     {
         name: "item",
         type: "input",
-        message: "What item would you like to purchase? (Choose ID)",
+        message: "\nWhat item would you like to purchase? (Choose ID)",
         validate: function(value) {
             if (isNaN(value) === false) {                    
                 return true;
@@ -74,7 +74,7 @@ function howMany(quantity, itemId, price) {
         {
             name: "quantity",
             type: "input",
-            message: "How many of this would you like to buy?",
+            message: "\nHow many of this would you like to buy?",
             validate: function(value) {
                 if (isNaN(value) === false) {
                     return true;
@@ -85,12 +85,12 @@ function howMany(quantity, itemId, price) {
     ]).then(function(answer){
         if (answer.quantity > quantity) {
             console.log("\nI can only give you " + quantity.toString() + ". Please enter a valid quantity.\n");
-            howMany(quantity);
+            howMany(quantity, itemId, price);
             return;
         } else if (answer.quantity == quantity) {
-            console.log("\nI can give you " + answer.quantity.toString() + ". This all I have!\n");
+            console.log("\n" + answer.quantity.toString() + " items placed in your cart. This is all I have!\n");
         } else {
-            console.log("\nItems placed in your cart.\n");
+            console.log("\n" + answer.quantity.toString() + " items placed in your cart.\n");
         }
         var query1 = "UPDATE products SET ? WHERE ?";
         connection.query(query1,
@@ -104,6 +104,7 @@ function howMany(quantity, itemId, price) {
             ], function(err, res) {
                 if (err) throw err;
                 console.log("\nYour total is $" + (answer.quantity * price).toString() + "\n");
+                console.log("\nThanks for your business!\n");
                 setTimeout(start, 2000);
         });
     });
