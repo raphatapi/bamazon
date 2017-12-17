@@ -35,7 +35,9 @@ function start() {
                   description: {maxWidth: 40}
                 }
               })
-            console.log(columns);
+              if (res[i].stock_quantity >= 0) {
+                console.log(columns);
+              };
         };
         whatItem();
     });
