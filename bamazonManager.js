@@ -127,13 +127,13 @@ function addInventory() {
                   whatItem();
                   return;
               }
-              howMany(res[0].stock_quantity, answer.item);
+              howMany(res[0].stock_quantity, answer.item, res[0].product_name);
               return;
           });
       });
 };
 
-function howMany(quantity, itemId) {
+function howMany(quantity, itemId, productName) {
   inquirer.prompt([
     {
         name: "quantity",
@@ -147,7 +147,6 @@ function howMany(quantity, itemId) {
         }
     }
   ]).then(function(answer){
-      console.log(typeof quantity);
       var query1 = "UPDATE products SET ? WHERE ?";
       connection.query(query1,
           [
@@ -159,7 +158,7 @@ function howMany(quantity, itemId) {
               }
           ], function(err, res) {
               if (err) throw err;
-              console.log("\nYour new inventory is " + (quantity + parseInt(answer.quantity)).toString() + "\n");
+              console.log("\nThe quantity of " + productName + " has been updated to " + (quantity + parseInt(answer.quantity)).toString() + " units.\n");
               setTimeout(start, 2000);
       });
   });
@@ -213,27 +212,11 @@ function addNewProduct() {
         }
     ]).then(function(answer){
         var query = "INSERT INTO products (product_name, department_name, price, stock_quantity) VALUES ('" + answer.name + "', '" + answer.department + "', " + answer.price.toString() + ", " + answer.quantity.toString() + ");";
-        connection.query(query,
-            [
-            //     {
-            //         product_name: answer.name
-            //     },
-            //     {
-            //         department_name: answer.department
-            //     },
-            //     {
-            //         price: answer.price
-            //     },
-            //     {
-            //         stock_quantity: answer.quantity
-            //     }
-            ]
-            , function(err, res) {
+        connection.query(query, [], function(err, res) {
                 if (err) throw err;
                 console.log("\nYour product " + answer.name + " has been added, to the " + answer.department + " department, at $" + answer.price.toString() + " price, with " + answer.quantity.toString() + " quantity.\n");
                 setTimeout(start, 2000);
             }
         )
     })
-
 }
