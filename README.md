@@ -8,7 +8,7 @@
 `git clone https://github.com/raphatapi/bamazon.git`
 
 #### For Customers:
-`node
+`node bamazonCustomer.js`
 
 #### This application allows customers to purchase the listed products selecting them by their id.
 
@@ -24,6 +24,9 @@
 ## Manager App :chart_with_upwards_trend:
 
 ![Manager Gif](/gif/manager.gif)
+
+#### For Managers:
+`node bamazonManager.js`
 
 #### This application allows users to manage the store.
 
