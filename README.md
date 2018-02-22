@@ -4,6 +4,12 @@
 
 ![Bamazon Gif](/gif/bamazon.gif)
 
+### Run these:
+`git clone https://github.com/raphatapi/bamazon.git`
+
+#### For Customers:
+`node
+
 #### This application allows customers to purchase the listed products selecting them by their id.
 
 * If you select a product that's not listed, the app will ask you to choose a valid one.
